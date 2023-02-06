@@ -6,26 +6,29 @@ import random
 RED = (0, 255, 0)
 GREEN = (255, 0, 0)
 BLUE = (0, 0, 255)
+YELLOW = (150, 255, 0)
+CYAN = (255, 0, 255)
+PURPLE = (0, 180, 255)
+WHITE = (255, 255, 255)
 OFF = (0, 0, 0)
 
 
 class LED:
-    RED = (0, 255, 0)
-    OFF = (0, 0, 0)
+    REF = None
 
-    def __init__(self, pin=None, col=RED, brightness=0.3):
-        self._brightness = brightness
-        try:
-            self._np = NeoPixel(
-                board.GP16, 1, brightness=brightness, auto_write=True)
-        except ValueError:
-            self._np.deinit()
-            self._np = NeoPixel(
-                board.GP16, 1, brightness=brightness, auto_write=True)
+    def __init__(self, color=RED, brightness=0.3):
 
-        self._col = col
+        if LED.REF:
+            LED.REF.deinit()
 
-    def digital_write(self, value, color=None):
+        self._np = NeoPixel(
+            board.GP16, 1, brightness=brightness, auto_write=True)
+
+        self._col = color
+        LED.REF = self._np
+
+    def write(self, value, color=None):
+        """write digital value on led"""
         if value:
             if color:
                 self._col = color
@@ -37,21 +40,33 @@ class LED:
         self._np[0] = value
         # self._np.write()
 
+    def on(self):
+        self.write(1)
+
+    def off(self):
+        self.write(0)
+
+    def toggle(self):
+        if self._np[0] == (0, 0, 0):
+            self.write(1)
+        else:
+            self.write(0)
+
     @property
     def color(self):
         return self._col
 
     @color.setter
-    def color(col):
+    def color(self, col):
         self._col = col
 
     @property
     def brightness(self):
-        return self._brightness
+        return self._np.brightness
 
     @brightness.setter
-    def brightness(br):
-        self._brightness = br
+    def brightness(self, br):
+        self._np.brightness = br
 
 
 if __name__ == '__main__':
