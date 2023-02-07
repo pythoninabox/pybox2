@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
     def test(t):
         while True:
-            led.digital_write(1, colori[random.randint(0, 2)])
+            led.write(1, colori[random.randint(0, 2)])
             time.sleep(t)
-            led.digital_write(0)
+            led.write(0)
             time.sleep(t)
 
     test(0.125)
