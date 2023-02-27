@@ -60,7 +60,6 @@ class PixelStrip:
             PixelStrip.REF.deinit()
 
 
-
 led = PixelStrip()
 
 

@@ -557,6 +557,58 @@
       <horizontalAlignment>CENTER</horizontalAlignment>
       <value>SPKR</value>
     </diylc.misc.WrapLabel>
+    <diylc.misc.WrapLabel>
+      <name>L5</name>
+      <controlPoints>
+        <point x="4.9" y="2.5"/>
+        <point x="5.1" y="2.5"/>
+      </controlPoints>
+      <firstPoint x="4.9" y="2.5"/>
+      <secondPoint x="5.1" y="2.5"/>
+      <font name="Dialog.bold" size="10" style="1"/>
+      <color hex="000000"/>
+      <horizontalAlignment>CENTER</horizontalAlignment>
+      <value>GP6</value>
+    </diylc.misc.WrapLabel>
+    <diylc.misc.WrapLabel>
+      <name>L6</name>
+      <controlPoints>
+        <point x="4.8999999999999995" y="4.0"/>
+        <point x="5.1" y="4.0"/>
+      </controlPoints>
+      <firstPoint x="4.8999999999999995" y="4.0"/>
+      <secondPoint x="5.1" y="4.0"/>
+      <font name="Dialog.bold" size="10" style="1"/>
+      <color hex="000000"/>
+      <horizontalAlignment>CENTER</horizontalAlignment>
+      <value>GP27</value>
+    </diylc.misc.WrapLabel>
+    <diylc.misc.WrapLabel>
+      <name>L7</name>
+      <controlPoints>
+        <point x="5.1" y="3.9"/>
+        <point x="5.3" y="3.9"/>
+      </controlPoints>
+      <firstPoint x="5.1" y="3.9"/>
+      <secondPoint x="5.3" y="3.9"/>
+      <font name="Dialog.bold" size="10" style="1"/>
+      <color hex="000000"/>
+      <horizontalAlignment>CENTER</horizontalAlignment>
+      <value>GP26</value>
+    </diylc.misc.WrapLabel>
+    <diylc.misc.WrapLabel>
+      <name>L8</name>
+      <controlPoints>
+        <point x="5.2" y="2.5"/>
+        <point x="5.4" y="2.5"/>
+      </controlPoints>
+      <firstPoint x="5.2" y="2.5"/>
+      <secondPoint x="5.4" y="2.5"/>
+      <font name="Dialog.bold" size="10" style="1"/>
+      <color hex="000000"/>
+      <horizontalAlignment>CENTER</horizontalAlignment>
+      <value>GP8</value>
+    </diylc.misc.WrapLabel>
   </components>
   <groups/>
   <lockedLayers/>

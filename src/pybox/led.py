@@ -16,7 +16,7 @@ OFF = (0, 0, 0)
 class LED:
     REF = None
 
-    def __init__(self, color=RED, brightness=0.3):
+    def __init__(self, color=RED, brightness=0.25):
 
         if LED.REF:
             LED.REF.deinit()
@@ -24,20 +24,21 @@ class LED:
         self._np = NeoPixel(
             board.GP16, 1, brightness=brightness, auto_write=True)
 
-        self._col = color
+        self._led = self._np[0]
+        self._col = switch(color)
         LED.REF = self._np
 
     def write(self, value, color=None):
         """write digital value on led"""
         if value:
             if color:
-                self._col = color
+                self._col = switch(color)
             value = self._col
 
         else:
             value = OFF
 
-        self._np[0] = value
+        self._led = value
         # self._np.write()
 
     def on(self):
@@ -47,7 +48,7 @@ class LED:
         self.write(0)
 
     def toggle(self):
-        if self._np[0] == (0, 0, 0):
+        if self._led == (0, 0, 0):
             self.write(1)
         else:
             self.write(0)
@@ -58,7 +59,7 @@ class LED:
 
     @color.setter
     def color(self, col):
-        self._col = col
+        self._col = switch(col)
 
     @property
     def brightness(self):
@@ -67,6 +68,10 @@ class LED:
     @brightness.setter
     def brightness(self, br):
         self._np.brightness = br
+
+
+def switch(_color):
+    return _color[1], _color[0], _color[2]
 
 
 if __name__ == '__main__':
