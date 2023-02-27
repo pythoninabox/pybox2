@@ -4,7 +4,7 @@ from digitalio import DigitalInOut, Direction, Pull
 
 class BUTTON:
     def __init__(self):
-        self.btn = DigitalInOut(board.GP8)
+        self.btn = DigitalInOut(board.GP6)
         self.btn.direction = Direction.INPUT
         self.btn.pull = Pull.UP
         self.previous_status = True

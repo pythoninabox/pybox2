@@ -4,8 +4,8 @@ import random
 import time
 from neopixel import NeoPixel
     
-pin = board.GP14
-led = NeoPixel(board.GP16, 1, brightness=0.3, auto_write=True)
+pin = board.GP8
+led = NeoPixel(board.GP27, 12, brightness=0.25, auto_write=True)
 
 
 def mtof(m):
@@ -83,14 +83,14 @@ sequence = [
     [154, 67, 2000] 
     ]
 
-led[0] = (0,0,0)
+led.fill((0,0,0))
 
 if __name__ == '__main__':
     for note in sequence:
-        led[0] = (0,0,0)
+        led.fill((0,0,0))
         time.sleep(note[0] * 0.0006)
-        led[0] = (0,0,255)
+        led.fill((0,0,255))
         simpleio.tone(pin, mtof(note[1] - 12), note[2] * 0.0006)
         
-led[0] = (0,0,0)    
+led.fill((0,0,0))    
         
