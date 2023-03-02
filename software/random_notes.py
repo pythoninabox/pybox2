@@ -1,26 +1,42 @@
-import board
-import simpleio
-import random
 import time
-from neopixel import NeoPixel
-    
-pin = board.GP8
-led = NeoPixel(board.GP27, 12, brightness=0.25, auto_write=True)
+import rp2pio
+import board
+import adafruit_pioasm
 
+squarewave = """
+.program squarewave
+    set pins 1 [31]    ; Drive pin high and then delay for one cycle
+    set pins 0 [31]     ; Drive pin low
+"""
 
 def mtof(m):
-    return int(2**((m-69)/12) * 440)
+    return int(2**((m-69) / 12) * 440)
 
-def offset(mseq, o):
-    return [ x + o for x in mseq ]
+seq = (0,2,4,5,7,9,11,12)
+
+assembled = adafruit_pioasm.assemble(squarewave)
+
+sm = rp2pio.StateMachine(
+    assembled,
+    frequency=1000 * 2,
+    first_set_pin=board.GP8,
+)                              
+
+"""
+sm2 = rp2pio.StateMachine(
+    assembled,
+    frequency=1000 * 2,
+    first_set_pin=board.GP27,
+)
+"""
 
 sequence = [
-    [18, 67, 788] ,
+    [18, 67, 788] , #onset, #note #duration, example: sm.stop(), time.sleep(18 * 0.0006), note: mtof(67), time.sleep(788 * 0.0006)
     [172, 67, 788] ,
     [172, 67, 788] ,
-    [170, 63, 548] ,
-    [164, 70, 94] ,
-    [154, 67, 792] ,
+    [172, 63, 540] ,
+    [172, 70, 108] ,
+    [140, 67, 792] ,
     [170, 63, 550] ,
     [168, 70, 92] ,
     [140, 67, 1752] ,
@@ -80,19 +96,30 @@ sequence = [
     [164, 67, 788] ,
     [164, 63, 592] ,
     [118, 70, 94] ,
-    [154, 67, 2000] 
+    [154, 67, 1200] 
     ]
 
+bpm = 160
+tempo = 30000 / bpm / 1000
+final_tempo = tempo / 480
 
-if __name__ == '__main__':
-    led.fill((0,0,0))
-    
-    for note in sequence:
-        led.fill((0,0,0))
-        time.sleep(note[0] * 0.0006)
-        #led.fill((0,0,255))
-        led[(note[1] - 1) % 12] = 0,0,255
-        simpleio.tone(pin, mtof(note[1] - 12), note[2] * 0.0006)
-    
-    led.fill((0,0,0))    
+for event in sequence:
+    sm.stop()
+    time.sleep(event[0] * final_tempo)
+    sm.restart()
+    sm.frequency = mtof(event[1]) * 32
+    time.sleep(event[2] * final_tempo)
+
+
+sm.stop()
+"""
+stopped = 1
+
+while True:
+    note = input("midi note (36 - 127) > ")
+    note = int(note)
+    if stopped:
+        sm.restart()
         
+    sm.frequency = mtof(note) * 32
+"""  

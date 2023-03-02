@@ -17,7 +17,7 @@ class PixelStrip:
     REF = None
     PIXEL_NUMBER = 8
 
-    def __init__(self, ctrl_pin=14, color=RED, brightness=0.3):
+    def __init__(self, ctrl_pin=27, color=RED, brightness=0.3):
 
         self._check_busy()
 
