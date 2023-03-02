@@ -6,11 +6,17 @@ from pybox.color import *
 
 
 class LED:
+    def __init__(self, target='internal', color=RED, brightness=0.25):
 
-    def __init__(self, color=RED, brightness=0.25):
+        if target == 'internal':
+            pin = board.GP16
+            order = 'RGB'
+        elif target == 'external':
+            pin = board.GP27
+            order = 'GRB'
 
         self._np = NeoPixel(
-            board.GP27, 1, brightness=brightness, auto_write=True)
+            pin, 1, brightness=brightness, auto_write=True, pixel_order=order)
 
         self._col = color
 
