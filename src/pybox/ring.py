@@ -14,8 +14,7 @@ OFF = (0, 0, 0)
 
 
 class PixelStrip:
-    REF = None
-    PIXEL_NUMBER = 8
+    PIXEL_NUMBER = 12
 
     def __init__(self, ctrl_pin=27, color=RED, brightness=0.3):
 
@@ -27,7 +26,6 @@ class PixelStrip:
             _pin, PixelStrip.PIXEL_NUMBER, brightness=brightness, auto_write=True)
 
         self._col = color
-        PixelStrip.REF = self._np
 
     """
     def __setitem__(self, index, item):
