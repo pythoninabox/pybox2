@@ -1,6 +1,7 @@
 from neopixel import NeoPixel
 import board
 import time
+from collections import namedtuple
 
 # led = NeoPixel(board.GP27, 8, bpp=3, brightness=0.3, auto_write=True)
 RED = (255, 0, 0)
@@ -13,60 +14,44 @@ WHITE = (255, 255, 255)
 OFF = (0, 0, 0)
 
 
-class PixelStrip:
-    PIXEL_NUMBER = 12
+class RING:
+    NUMBER = 12
 
-    def __init__(self, ctrl_pin=27, color=RED, brightness=0.3):
+    def __init__(self, ctrl_pin=board.GP27, color=RED, brightness=0.25):
 
-        self._check_busy()
-
-        _pin = getattr(board, 'GP'+str(ctrl_pin))
+        # _pin = getattr(board, 'GP'+str(ctrl_pin))
 
         self._np = NeoPixel(
-            _pin, PixelStrip.PIXEL_NUMBER, brightness=brightness, auto_write=True)
+            ctrl_pin, RING.NUMBER, brightness=brightness, auto_write=True)
 
         self._col = color
 
-    """
+        for i in range(RING.NUMBER):
+            self._np[i] = SubTuple(self._np[i])
+
     def __setitem__(self, index, item):
         self._np[index] = item
-        
+
     def __getitem__(self, index):
         return self._np[index]
-    """
-
-    def on(self, index=None):
-        if index is not None:
-            self._np[index] = self._col
-        else:
-            self._np.fill(self._col)
-
-    def off(self, index=None):
-        if index is not None:
-            self._np[index] = OFF
-        else:
-            self._np.fill(OFF)
-
-    def get_brightness(self, index):
-        return self._np[index].brightness
-
-    def set_brightness(self, index, value):
-        self._np[index].brightness = value
-
-    def _check_busy(self):
-        if PixelStrip.REF:
-            PixelStrip.REF.deinit()
 
 
-led = PixelStrip()
+SubTuple = namedtuple('SubTuple', ('item',))
 
 
-led.on(0)
-led.on(4)
-time.sleep(2)
-led._np[0] = tuple(map(lambda x: int(x * 0.75), (0, 255, 0)))
-time.sleep(2)
-led._np[0] = tuple(map(lambda x: int(x * 0.3), (0, 255, 0)))
-time.sleep(2)
-led.off(0)
-led.off(4)
+class SubTuple(tuple):
+    def __new__(self, item):
+        # self.data = item
+        return tuple.__new__(SubTuple, (item,))
+
+    def on(self, col=RED):
+        self.data = col
+
+
+"""
+class Point(tuple):
+...    def __new__(self, x, y):
+...        return tuple.__new__(Point, (x, y))
+"""
+
+# https://jfine-python-classes.readthedocs.io/en/latest/subclass-tuple.html
