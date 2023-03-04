@@ -1,33 +1,20 @@
 from neopixel import NeoPixel
 import board
-import time
-from collections import namedtuple
-
-# led = NeoPixel(board.GP27, 8, bpp=3, brightness=0.3, auto_write=True)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 150, 0)
-CYAN = (0, 255, 255)
-PURPLE = (180, 0, 255)
-WHITE = (255, 255, 255)
-OFF = (0, 0, 0)
+from pybox.color import *
 
 
 class RING:
     NUMBER = 12
 
     def __init__(self, ctrl_pin=board.GP27, color=RED, brightness=0.25):
-
-        # _pin = getattr(board, 'GP'+str(ctrl_pin))
-
         self._np = NeoPixel(
-            ctrl_pin, RING.NUMBER, brightness=brightness, auto_write=True)
+            ctrl_pin,
+            RING.NUMBER,
+            brightness=brightness,
+            auto_write=True)
 
-        self._col = color
-
-        for i in range(RING.NUMBER):
-            self._np[i] = SubTuple(self._np[i])
+        self._col = [color] * 8
+        self._global_col = color
 
     def __setitem__(self, index, item):
         self._np[index] = item
@@ -35,23 +22,45 @@ class RING:
     def __getitem__(self, index):
         return self._np[index]
 
+    def set(self, index, col=None):
+        self._np[index] = self.__parse_color(index, col)
 
-SubTuple = namedtuple('SubTuple', ('item',))
+    def sets(self, tuple_indexes, col=None):
+        for index in tuple_indexes:
+            value = self.__parse_color(index, col)
+            self.set(index, value)
 
+    def fill(self, col=None):
+        if col is not None:
+            if isinstance(col, tuple):
+                self._global_col = col
+                _col = col
+            elif col == 0:
+                _col = OFF
+            else:
+                _col = self._global_col
+        else:
+            _col = self._global_col
 
-class SubTuple(tuple):
-    def __new__(self, item):
-        # self.data = item
-        return tuple.__new__(SubTuple, (item,))
+        self._np.fill(_col)
 
-    def on(self, col=RED):
-        self.data = col
+    def set_global_color(self, col=None):
+        if col is not None:
+            _col = [col]
+        else:
+            _col = [RED]
+        self._col = _col * self._np.n
 
+    def set_color(self, index, col=None):
+        self._col[index] = col
 
-"""
-class Point(tuple):
-...    def __new__(self, x, y):
-...        return tuple.__new__(Point, (x, y))
-"""
+    def __parse_color(self, index, col=None):
+        if col is not None:
+            if isinstance(col, tuple):
+                if col != OFF:
+                    self._col[index] = col
+                return col
+            elif col == 0:
+                return OFF
 
-# https://jfine-python-classes.readthedocs.io/en/latest/subclass-tuple.html
+        return self._col[index]
