@@ -1,9 +1,10 @@
 import board
 import simpleio
 
+
 class TONE:
     def __init__(self):
-        self._pin = board.GP2
+        self._pin = board.GP8
 
     def play(self, note=440, duration=1):
         simpleio.tone(self._pin, note, duration)
