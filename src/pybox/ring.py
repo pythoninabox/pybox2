@@ -13,27 +13,42 @@ class RING:
             brightness=brightness,
             auto_write=True)
 
-        self._col = [color] * 8
+        self._col = [color] * RING.NUMBER
         self._global_col = color
 
     def __setitem__(self, index, item):
-        self._np[index] = item
+        """_set a pixel as list item_
+
+        Args:
+            index (int): pixel index
+            item (tuple): tuple for RGB desc
+        """
+        self._np[index] = self.__parse_color(index, item)
 
     def __getitem__(self, index):
         return self._np[index]
 
     def set(self, index, col=None):
-        self._np[index] = self.__parse_color(index, col)
+        if isinstance(index, int):
+            self.__set_single_led(index, col)
+            return None
+        else:
+            try:
+                for i in index:
+                    self.__set_single_led(i, col)
+                return None
+            except TypeError as exc:
+                raise TypeError(
+                    "Please, provide an int, a tuble or a list as first arg") from exc
 
-    def sets(self, tuple_indexes, col=None):
-        for index in tuple_indexes:
-            value = self.__parse_color(index, col)
-            self.set(index, value)
+    def __set_single_led(self, index, color):
+        self._np[index] = self.__parse_color(index, color)
 
     def fill(self, col=None):
         if col is not None:
             if isinstance(col, tuple):
-                self._global_col = col
+                if col != OFF:
+                    self._global_col = col
                 _col = col
             elif col == 0:
                 _col = OFF
