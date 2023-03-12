@@ -1,6 +1,6 @@
 from neopixel import NeoPixel
 import board
-from pybox.color import *
+from pybox.color import RED, OFF
 
 
 class RING:
@@ -39,7 +39,7 @@ class RING:
                 return None
             except TypeError as exc:
                 raise TypeError(
-                    "Please, provide an int, a tuble or a list as first arg") from exc
+                    "Please, provide an int, a tuple or a list as first arg") from exc
 
     def __set_single_led(self, index, color):
         self._np[index] = self.__parse_color(index, color)
