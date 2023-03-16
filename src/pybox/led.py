@@ -10,7 +10,7 @@ class LED:
 
         if target == 'internal':
             pin = board.GP16
-            order = 'RGB'
+            order = 'GRB'
         elif target == 'external':
             pin = board.GP27
             order = 'GRB'
