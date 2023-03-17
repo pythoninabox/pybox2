@@ -52,7 +52,7 @@ class LED:
 
     @color.setter
     def color(self, col):
-        self._col = col  # switch(col)
+        self._col = col
 
     @property
     def brightness(self):
@@ -61,10 +61,6 @@ class LED:
     @brightness.setter
     def brightness(self, br):
         self._np.brightness = br
-
-
-def switch(_color):
-    return _color[1], _color[0], _color[2]
 
 
 if __name__ == '__main__':
