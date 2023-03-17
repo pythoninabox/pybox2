@@ -46,6 +46,9 @@ class LED:
         else:
             self.write(0)
 
+    def deinit(self):
+        self._np.deinit()
+
     @property
     def color(self):
         return self._col
