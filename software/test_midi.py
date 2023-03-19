@@ -1,11 +1,15 @@
-import time
+import time, random
 import rp2pio
 import board
 import adafruit_pioasm
 from umidi import umidiparser as umid
+from pybox.ring import RING
+from pybox.color import *
 
-path = 'courante2_t0.mid'
+path = 'track.mid'
 data = umid.MidiFile(path)
+ring = RING()
+counter = 0
 
 def mtof(m):
     return int(2**((m - 69) / 12) * 440)
@@ -29,9 +33,11 @@ parsed = []
 
 for command in data:
     if command._get_event_name() == 'note_on':
-        time.sleep(command.delta_us / 1000000)
+        time.sleep(command.delta_us / 3000000)
         if command.velocity == 0:
             sm.stop()
+            ring.fill(OFF)
         else:
             sm.restart()
-            sm.frequency = mtof(command.note) * 32
+            sm.frequency = mtof(command.note + 12) * 32
+            ring[command.note % 12] = BLUE
