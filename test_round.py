@@ -2,7 +2,7 @@ from neopixel import NeoPixel
 import board
 import time
 
-led = NeoPixel(board.GP14, 8, brightness=0.2, auto_write=True)
+led = NeoPixel(board.GP27, 12, brightness=0.2, auto_write=True)
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -16,6 +16,7 @@ MAX = 8
 NUMBER = 1
 TIME = 0.05
 
+"""
 index = 0
 
 for i in range(8):
@@ -38,7 +39,7 @@ while index < 100:
       
 for i in range(8):
     led[i] = OFF  
-    
+"""    
     
     
     

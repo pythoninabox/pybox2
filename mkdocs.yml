@@ -1,0 +1,12 @@
+site_name: pybox
+
+theme:
+  name: null
+  custom_dir: 'cinder'
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - index.md
+  - reference.md
