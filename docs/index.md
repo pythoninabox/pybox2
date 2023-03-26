@@ -17,3 +17,4 @@ This site contains the project documentation for the
 The documentation consists of these separate parts:
 
 1. [Reference](reference.md)
+    - [button](button.md)

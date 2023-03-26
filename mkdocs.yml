@@ -1,12 +1,11 @@
 site_name: pybox
 
 theme:
-  name: null
-  custom_dir: 'cinder'
+  name: bootstrap
 
 plugins:
   - mkdocstrings
 
 nav:
-  - index.md
-  - reference.md
+  - Index: index.md
+  - Reference: reference.md 
