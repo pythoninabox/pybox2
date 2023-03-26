@@ -4,7 +4,7 @@ This module help you to manage single rgb led (internal or external).
 
 Examples:
     >>> from pybox.led import LED
-    >>> from pybox,color import *
+    >>> from pybox.color import *
     # drive internal led
     >>> led = LED()
     >>> led.color = BLUE

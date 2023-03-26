@@ -1,6 +1,4 @@
-"""Button manager.
-
-This module help you to manage integrated button.
+"""This module help you to manage integrated button.
 
 Examples:
     >>> from pybox.button import BUTTON
@@ -19,10 +17,7 @@ import board
 from digitalio import DigitalInOut, Direction, Pull
 
 class BUTTON:
-    """Button manager.
-
-    Args:
-        None
+    """Button class.
     """
     def __init__(self):
         self.btn = DigitalInOut(board.GP6)
@@ -35,9 +30,6 @@ class BUTTON:
         
     def update(self):
         """Update button state on main loop.
-
-        Args:
-            None
         """
         for func in self._actions:
             func()
@@ -104,7 +96,7 @@ class BUTTON:
         """Raw button value.
 
         Returns:
-            value (int): button value, 1 if pressed, 0 otherwise
+            (int): button value, 1 if pressed, 0 otherwise
         """
         return int(not self.btn.value)
 

@@ -1,7 +1,7 @@
 site_name: pybox
 
 theme:
-  name: flatly
+  name: terminal
 
 plugins:
   - mkdocstrings
@@ -11,4 +11,6 @@ markdown_extensions:
 
 nav:
   - Index: index.md
-  - Reference: reference.md 
+  - Reference:  
+    - Button: button.md
+    - Led: led.md
