@@ -2,12 +2,12 @@
 
 ---
 
-## button module
+## Button Module
 
 ::: src.pybox.button
 
 ---
 
-## led module
+## Led Module
 
 ::: src.pybox.led

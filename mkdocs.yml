@@ -1,10 +1,13 @@
 site_name: pybox
 
 theme:
-  name: bootstrap
+  name: flatly
 
 plugins:
   - mkdocstrings
+
+markdown_extensions:
+  - smarty
 
 nav:
   - Index: index.md
