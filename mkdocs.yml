@@ -1,7 +1,7 @@
 site_name: pybox
 
 theme:
-  name: terminal
+  name: windmill
 
 plugins:
   - mkdocstrings
@@ -9,8 +9,14 @@ plugins:
 markdown_extensions:
   - smarty
 
+watch:
+  - src/pybox
+
 nav:
   - Index: index.md
   - Reference:  
     - Button: button.md
     - Led: led.md
+  - Exercises:
+    - Button: tut_button.md
+    - Led: tut_led.md

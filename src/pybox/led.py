@@ -1,6 +1,4 @@
-"""Led manager.
-
-This module help you to manage single rgb led (internal or external).
+"""This module help you to manage single rgb led (internal or external).
 
 Examples:
     >>> from pybox.led import LED
@@ -16,6 +14,7 @@ Examples:
 The user basically should use only the `LED` class inside it.  
 """
 
+from typing import Union
 import board
 from neopixel import NeoPixel
 import time
@@ -24,25 +23,35 @@ from pybox.color import *
 
 
 class LED:
-    """Led manager.
+    """Led class.
     """
-    def __init__(self, target='internal', color=RED, brightness=0.25):
 
+    def __init__(self, target: Union[str, board.board_id] = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
+        """_summary_
+
+        Args:
+            target (str, optional): led to drive, 'internal', 'external' o a board string (i.e. board.GP18).
+            color (tuple[int], optional): color in (r, g, b) format.
+            brightness (float, optional): value between 0.0 and 1.0.
+        """
         if target == 'internal':
             pin = board.GP16
             order = 'GRB'
         elif target == 'external':
             pin = board.GP27
             order = 'GRB'
+        else:
+            pin = target
+            order = 'RGB'
 
         self._np = NeoPixel(
             pin, 1, brightness=brightness, auto_write=True, pixel_order=order)
 
         self._col = color
 
-    def write(self, value, color=None):
+    def write(self, value: int, color: Union[None, tuple] = None) -> None:
         """Write digital value on led.
-        
+
         Examples:
             >>> # turn on the led with color RED
             >>> led.write(1, RED)
@@ -50,8 +59,8 @@ class LED:
             >>> led.write(0)
 
         Args:
-            value (int): value to write: 1 to turn on the led, 0 otherwise
-            color (tuple): color in tuple (r, g, b) format
+            value: value to write: 1 to turn on the led, 0 otherwise
+            color: color in tuple (r, g, b) format
         """
         if value == 1:
             if color:
@@ -98,6 +107,15 @@ class LED:
 
     @property
     def color(self):
+        """Get or set the color.
+
+        Examples:
+            >>> led.color = GREEN
+            >>> led.on()
+
+        Returns:
+            (tuple): color in tuple format
+        """
         return self._col
 
     @color.setter
@@ -105,12 +123,26 @@ class LED:
         self._col = col
 
     @property
-    def brightness(self):
+    def brightness(self) -> float:
+        """Get or set the brightness
+
+        Examples:
+            >>> # fade in brightness starting from 0 to 1
+            >>> import time
+            >>> led.on()
+            >>> led.brightness = 0
+            >>> for i in range(101):
+            >>>     led.brightness = i / 100
+            >>>     time.sleep(0.01)
+
+        Returns:
+            brightness value as a float between 0.0 and 1.0
+        """
         return self._np.brightness
 
     @brightness.setter
-    def brightness(self, br):
-        self._np.brightness = br
+    def brightness(self, bright):
+        self._np.brightness = bright
 
 
 if __name__ == '__main__':
