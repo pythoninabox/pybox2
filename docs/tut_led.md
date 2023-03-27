@@ -4,3 +4,4 @@ Creare dispositivo con un led di colore verde che si accende e si spegne alla fr
 
 # #2
 
+pass
