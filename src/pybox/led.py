@@ -14,7 +14,7 @@ Examples:
 The user basically should use only the `LED` class inside it.  
 """
 
-from typing import Union
+#from typing import Union
 import board
 from neopixel import NeoPixel
 import time
@@ -26,7 +26,7 @@ class LED:
     """Led class.
     """
 
-    def __init__(self, target: Union[str, board.board_id] = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
+    def __init__(self, target: str = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
         """_summary_
 
         Args:
@@ -49,7 +49,7 @@ class LED:
 
         self._col = color
 
-    def write(self, value: int, color: Union[None, tuple] = None) -> None:
+    def write(self, value: int, color: tuple = None) -> None:
         """Write digital value on led.
 
         Examples:
