@@ -22,11 +22,6 @@ class BUTTON:
     """Button class.
     """
     def __init__(self):
-        """
-        self.btn = DigitalInOut(board.GP6)
-        self.btn.direction = Direction.INPUT
-        self.btn.pull = Pull.UP
-        """
         self.keys = keypad.Keys((board.GP6,), value_when_pressed=False)
         self.previous_status = True
         self._actions = []
@@ -113,16 +108,17 @@ class BUTTON:
         """
         return int(not self.btn.value)
 
-
-def pre():
-    print("PRESSEEEED :-D")
-    
-def rel():
-    print("__RELEASED :-(")
         
 if __name__=='__main__':
         
     push = BUTTON()
+    
+    def pre():
+        print("PRESSEEEED :-D")
+    
+    def rel():
+        print("__RELEASED :-(")
+    
     push.press_handler(pre)
     push.release_handler(rel)
     
