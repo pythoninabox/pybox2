@@ -1,7 +1,7 @@
 """This module help you to manage integrated button.
 
 Examples:
-    >>> from pybox.button import BUTTON
+    >>> from pybox.button import SIMPLEBUTTON
     >>> but = SIMPLEBUTTON()
     >>> but.value
     0
@@ -10,6 +10,9 @@ Examples:
     1
 
 The user basically should use only the `BUTTON` class inside it.  
+The module consists basically in two class:  
+    - `SIMPLEBUTTON`: to retrieve the value of the button  
+    - `BUTTON`: to bind custom functions to button behavior
 """
 
 #import time
