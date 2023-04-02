@@ -15,7 +15,7 @@ The module consists basically in two class:
     - `BUTTON`: to bind custom functions to button behavior
 """
 
-#import time
+import time
 import board
 from digitalio import DigitalInOut, Direction, Pull
 import keypad
@@ -25,9 +25,11 @@ class BUTTON:
     """Button class.
     """
     def __init__(self):
-        self.keys = keypad.Keys((board.GP6,), value_when_pressed=True)
+        self.keys = keypad.Keys((board.GP6,), value_when_pressed=False)
         self.press_function = None
         self.release_function = None
+        self._press_time = None
+        self._press_timestamp = None
         
     def update(self):
         """Update button state on main loop.
@@ -36,8 +38,10 @@ class BUTTON:
         event = self.keys.events.get()
         if event:
             if event.pressed:
+                self._press_timestamp = time.monotonic()
                 self.press_function()
             elif event.released:
+                self._press_time = time.monotonic() - self._press_timestamp
                 self.release_function()
         
     def press_handler(self, func):
@@ -79,6 +83,15 @@ class BUTTON:
             - Add possibility to add arguments to func
         """
         self.release_function = func
+
+    @property
+    def press_time(self):
+        """Get time of pressure.
+
+        Returns:
+            float: time in float format
+        """
+        return self._press_time
 
 
 class SIMPLEBUTTON:
