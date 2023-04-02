@@ -2,7 +2,7 @@
 
 Examples:
     >>> from pybox.button import BUTTON
-    >>> but = BUTTON()
+    >>> but = SIMPLEBUTTON()
     >>> but.value
     0
     >>> # press and hold the button
@@ -12,7 +12,7 @@ Examples:
 The user basically should use only the `BUTTON` class inside it.  
 """
 
-import time
+#import time
 import board
 from digitalio import DigitalInOut, Direction, Pull
 import keypad
@@ -22,20 +22,13 @@ class BUTTON:
     """Button class.
     """
     def __init__(self):
-        self.keys = keypad.Keys((board.GP6,), value_when_pressed=False)
-        self.previous_status = True
-        self._actions = []
+        self.keys = keypad.Keys((board.GP6,), value_when_pressed=True)
         self.press_function = None
         self.release_function = None
         
     def update(self):
         """Update button state on main loop.
         """
-        """
-        for func in self._actions:
-            func()
-        """
-        #self.previous_status = self.btn.value
 
         event = self.keys.events.get()
         if event:
@@ -63,7 +56,6 @@ class BUTTON:
             - Add possibility to add arguments to func
         """
         self.press_function = func
-        self._add_handler(self.__pressed)
     
     def release_handler(self, func):
         """Add a function to call when button is released.
@@ -84,21 +76,16 @@ class BUTTON:
             - Add possibility to add arguments to func
         """
         self.release_function = func
-        self._add_handler(self.__released)
-        
-    def __pressed(self):
-        if not self.btn.value:
-            if self.previous_status != self.btn.value:
-                self.press_function()
-        
-    def __released(self):
-        if self.btn.value:
-            if self.previous_status != self.btn.value:
-                self.release_function()
-                
-    def _add_handler(self, f):
-        self._actions.append(f)
-        
+
+
+class SIMPLEBUTTON:
+    """SimpleButton class.
+    """
+    def __init__(self):
+        self.btn = DigitalInOut(board.GP6)
+        self.btn.direction = Direction.INPUT
+        self.btn.pull = Pull.UP
+
     @property
     def value(self):
         """Raw button value.
@@ -107,7 +94,6 @@ class BUTTON:
             (int): button value, 1 if pressed, 0 otherwise
         """
         return int(not self.btn.value)
-
         
 if __name__=='__main__':
         
