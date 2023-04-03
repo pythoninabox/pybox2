@@ -1,4 +1,7 @@
-"""This module help you to manage integrated button.
+"""
+*This module help you to manage integrated button.*
+
+---
 
 Examples:
     >>> from pybox.button import SIMPLEBUTTON
@@ -8,10 +11,9 @@ Examples:
     >>> # press and hold the button
     >>> but.value
     1
-
-The user basically should use only the `BUTTON` class inside it.  
+  
 The module consists basically in two class:  
-    - `SIMPLEBUTTON`: to retrieve the value of the button  
+    - `SIMPLEBUTTON`: to get the value of the button  
     - `BUTTON`: to bind custom functions to button behavior
 """
 
@@ -21,8 +23,31 @@ from digitalio import DigitalInOut, Direction, Pull
 import keypad
 
 
+class SIMPLEBUTTON:
+    """*SimpleButton class.*
+
+    ---
+
+    """
+    def __init__(self):
+        self.btn = DigitalInOut(board.GP6)
+        self.btn.direction = Direction.INPUT
+        self.btn.pull = Pull.UP
+
+    @property
+    def value(self):
+        """Raw button value.
+
+        Returns:
+            (int): button value, 1 if pressed, 0 otherwise
+        """
+        return int(not self.btn.value)
+
 class BUTTON:
-    """Button class.
+    """*Button class.*
+    
+    ---
+    
     """
     def __init__(self):
         self.keys = keypad.Keys((board.GP6,), value_when_pressed=False)
@@ -89,27 +114,10 @@ class BUTTON:
         """Get time of pressure.
 
         Returns:
-            float: time in float format
+            (float): time in seconds
         """
         return self._press_time
 
-
-class SIMPLEBUTTON:
-    """SimpleButton class.
-    """
-    def __init__(self):
-        self.btn = DigitalInOut(board.GP6)
-        self.btn.direction = Direction.INPUT
-        self.btn.pull = Pull.UP
-
-    @property
-    def value(self):
-        """Raw button value.
-
-        Returns:
-            (int): button value, 1 if pressed, 0 otherwise
-        """
-        return int(not self.btn.value)
         
 if __name__=='__main__':
         

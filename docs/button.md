@@ -1,3 +1,1 @@
-## Button Module
-
 ::: pybox.button

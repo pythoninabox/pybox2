@@ -1,4 +1,7 @@
-"""This module help you to manage single rgb led (internal or external).
+"""
+*This module help you to manage single rgb led (internal or external).*
+
+---
 
 Examples:
     >>> from pybox.led import LED
@@ -24,16 +27,19 @@ from pybox.color import *
 
 class LED:
     """Led class.
+
+    Args:
+        target (str, optional): led to drive, 'internal', 'external' or a board string (i.e. board.GP18).
+        color (tuple[int], optional): color in (r, g, b) format.
+        brightness (float, optional): value between 0.0 and 1.0.
+    
+    Examples:
+        >>> led = LED('external')
+        >>> led.color = BLUE
+        >>> led.on()
     """
 
     def __init__(self, target: str = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
-        """_summary_
-
-        Args:
-            target (str, optional): led to drive, 'internal', 'external' o a board string (i.e. board.GP18).
-            color (tuple[int], optional): color in (r, g, b) format.
-            brightness (float, optional): value between 0.0 and 1.0.
-        """
         if target == 'internal':
             pin = board.GP16
             order = 'GRB'

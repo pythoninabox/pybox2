@@ -1,3 +1,1 @@
-## Led Module
-
 ::: pybox.led

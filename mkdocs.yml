@@ -1,10 +1,7 @@
 site_name: pybox
 
 theme:
-  name: windmill
-
-plugins:
-  - mkdocstrings
+  name: material
 
 markdown_extensions:
   - smarty
@@ -12,11 +9,25 @@ markdown_extensions:
 watch:
   - ./pybox
 
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          do_something: true
+          heading_level: 2
+          show_root_toc_entry: false
+          show_root_full_path: false
+          show_category_heading: true
+          members_order: "source"
+          docstring_section_style: "list"
+          show_signature_annotations: true
+
 nav:
   - Index: index.md
   - Reference:  
-    - Button: button.md
-    - Led: led.md
+    - Button Module: button.md
+    - Led Module: led.md
   - Exercises:
     - Button: tut_button.md
     - Led: tut_led.md
