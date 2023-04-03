@@ -4,10 +4,10 @@
 
 ## Button Module
 
-::: src.pybox.button
+::: pybox.button
 
 ---
 
 ## Led Module
 
-::: src.pybox.led
+::: pybox.led

@@ -1,3 +1,3 @@
 ## Button Module
 
-::: src.pybox.button
+::: pybox.button

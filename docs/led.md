@@ -1,3 +1,3 @@
 ## Led Module
 
-::: src.pybox.led
+::: pybox.led
