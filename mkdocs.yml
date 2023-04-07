@@ -1,13 +1,20 @@
 site_name: pybox
 
+docs_dir: docs
+
 theme:
   name: material
+  palette:
+    primary: red
+  font:
+    text: Ubuntu
 
 markdown_extensions:
-  - smarty
+  - pymdownx.betterem
 
 watch:
   - ./pybox
+
 
 plugins:
 - mkdocstrings:
@@ -23,6 +30,9 @@ plugins:
           docstring_section_style: "list"
           show_signature_annotations: true
 
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - Index: index.md
   - Reference:  
@@ -32,4 +42,3 @@ nav:
   - Exercises:
     - Button: tut_button.md
     - Led: tut_led.md
-    - Ring: tut_ring.md

@@ -1,0 +1,17 @@
+language-python {
+    font-size: 32px;
+    color: red;
+}
+
+.md-typeset h1 {
+    color: red;
+}
+
+.md-typeset h5 > code {
+    font-size: 1.5em;
+    background-color: yellow;
+}
+
+body {
+    font-size: 3em;
+}

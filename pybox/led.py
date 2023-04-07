@@ -17,7 +17,6 @@ Examples:
 The user basically should use only the `LED` class inside it.  
 """
 
-#from typing import Union
 import board
 from neopixel import NeoPixel
 import time
