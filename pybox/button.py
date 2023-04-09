@@ -28,23 +28,33 @@ class SIMPLEBUTTON:
 
     ---
 
+    Examples:
+        >>> but = SIMPLEBUTTON()
+        >>> but.value
+        0                           # if button is not pressed
     """
 
     def __init__(self):
-        self.btn = DigitalInOut(board.GP6)
-        self.btn.direction = Direction.INPUT
-        self.btn.pull = Pull.UP
+        self.__btn = DigitalInOut(board.GP6)
+        self.__btn.direction = Direction.INPUT
+        self.__btn.pull = Pull.UP
+
+    def deinit(self):
+        """Turn off the button.
+        """
+        self.__btn.deinit()
 
     @property
     def value(self) -> int:
         """Raw button value.
 
-        1 if pressed, 0 otherwise
+        It contains the value of the button based on its status: 1 if pressed, 0 otherwise.
 
         Examples:
             >>> but.value
+            0
         """
-        return int(not self.btn.value)
+        return int(not self.__btn.value)
 
 
 class BUTTON:
@@ -52,73 +62,93 @@ class BUTTON:
 
     ---
 
+    Examples:
+        >>> but = BUTTON()
+        >>> def press_callback():
+        ...     print("PRESSED :=D")
+        >>> but.add_press_handler(press_callback)
+        >>> while True:
+        ...     but.update()
+
     """
 
     def __init__(self):
-        self.keys = keypad.Keys((board.GP6,), value_when_pressed=False)
-        self.press_function = None
-        self.release_function = None
-        self._press_time = None
-        self._press_timestamp = None
+        self.__keys = keypad.Keys((board.GP6,), value_when_pressed=False)
+        self.__press_function = None
+        self.__release_function = None
+        self.__press_time = None
+        self.__press_timestamp = None
 
     def update(self) -> None:
         """Update button state on main loop.
+
+        Examples:
+            >>> while True:
+            ...     but.update()
         """
 
-        event = self.keys.events.get()
+        event = self.__keys.events.get()
+
         if event:
             if event.pressed:
-                self._press_timestamp = time.monotonic()
-                self.press_function()
+                self.__press_timestamp = time.monotonic()
+                self.__press_function()
             elif event.released:
-                self._press_time = time.monotonic() - self._press_timestamp
-                self.release_function()
+                self.__press_time = time.monotonic() - self.__press_timestamp
+                self.__release_function()
 
     def press_handler(self, callback: callable = None) -> None:
-        """Add a function to call when button is pressed.
+        """Bind a function to call when button is pressed.
 
         Args:
             callback (callable): a function to be executed when button is pressed. 
 
         Examples:
             >>> def press_callback():
-                    print("PRESSED")
+            ...     print("PRESSED")
             >>> push = BUTTON()
             >>> push.press_handler(press_callback)
             >>> while True:
-                    push.update()
+            ...     push.update()
                     # it prints PRESSED on press button
 
         Todo:
-            - Add possibility to add arguments to func
+            - Add possibility to add arguments to callback
         """
-        self.press_function = callback
+
+        self.__press_function = callback
 
     def release_handler(self, callback: callable = None) -> None:
-        """Add a function to call when button is released.
+        """Bind a function to call when button is released.
 
         Args:
             callback (callable): a function to be executed when button is released.
 
         Examples:
             >>> def release_callback():
-                    print("RELEASED")
+            ...     print("RELEASED")
             >>> push = BUTTON()
             >>> push.release_handler(release_callback)
             >>> while True:
-                    push.update()
+            ...     push.update()
                     # it prints RELEASED on release button 
 
         Todo:
-            - Add possibility to add arguments to func
+            - Add possibility to add arguments to callback
         """
-        self.release_function = callback
+
+        self.__release_function = callback
+
+    def deinit(self):
+        """Turn off the button.
+        """
+        self.__keys.deinit()
 
     @property
     def press_time(self) -> float:
         """Time of pressure.
         """
-        return self._press_time
+        return self.__press_time
 
 
 if __name__ == '__main__':
