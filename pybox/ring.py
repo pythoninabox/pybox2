@@ -22,6 +22,8 @@ from pybox.color import RED, OFF
 class RING:
     """Ring class.
 
+    ---
+
     Args:
         color: color in (r, g, b) format, tipically a pybox.color identifier [ *Default*: pybox.color.RED ].
         brightness: value between 0.0 and 1.0 [ *Default*: 0.25 ].
@@ -41,6 +43,89 @@ class RING:
 
         self._col = [color] * RING.NUMBER
         self._global_col = color
+
+    def __set_single_led(self, index, color):
+        self._np[index] = self.__parse_color(index, color)
+
+    def write(self, col: tuple = None):
+        """Manage all the ring globally.
+
+        Args:
+            col (tuple | int): if a `tuple` set `full_color` property and use it to turn on/off the whole Ring, if a non-zero `int` turn on the whole Ring using `full_property`. If zero, turn off it with `pybox.color.OFF`
+
+        Examples:
+            >>> ring.write(1)   # turn on all the ring with current global color
+            >>> ring.write(0)   # turn off all the ring
+        """
+        if col is not None:
+            if isinstance(col, tuple):
+                if col != OFF:
+                    self._global_col = col
+                _col = col
+            elif col == 0:
+                _col = OFF
+            else:
+                _col = self._global_col
+        else:
+            _col = self._global_col
+
+        self._np.fill(_col)
+
+    def on(self):
+        """Turn on the ring globally.
+
+        Examples:
+            >>> ring.on()   # turn on all the ring with current global color
+        """
+        self.write(1)
+
+    def off(self):
+        """Turn off the ring globally.
+
+        Examples:
+            >>> ring.off()  # turn off the ring
+        """
+        self.write(0)
+
+    def toggle(self):
+        """Turn on the ring globally if the first Pixel is currently turned off and viceversa.
+
+        """
+        if self._np[0] == OFF:
+            self.write(1)
+        else:
+            self.write(0)
+
+    @property
+    def color(self):
+        """Get or set the global color used in `write` method
+
+        Args:
+            col (tuple[int]): color in tuple format, you can use pybox.color identifier. [ *Default*: `pybox.color.RED` ].
+
+        Examples:
+            >>> ring.color = CYAN   # set global color to pubox.color.CYAN
+            >>> ring.color          # get global color
+        """
+
+        return self._global_col
+
+    @color.setter
+    def color(self, col: tuple[int] = RED):
+        self._global_col = col
+
+    @property
+    def brightness(self):
+        """Get or set brightness (only at global level)
+
+        Args:
+            value (float): float between 0.0 (min brightness) and 1.0 (max brightness)
+        """
+        return self._np.brightness
+
+    @brightness.setter
+    def brightness(self, value: float = None):
+        self._np.brightness = value
 
     def __setitem__(self, index: int, item: tuple[int]):
         """Set a pixel as list item
@@ -72,80 +157,12 @@ class RING:
         """
         return self._np[index]
 
-
-    def __set_single_led(self, index, color):
-        self._np[index] = self.__parse_color(index, color)
-
-    def write(self, col: tuple = None):
-        """Manage all the ring globally.
-
-        Args:
-            col (tuple | int): if a `tuple` set `full_color` property and use it to turn on/off the whole Ring, if a non-zero `int` turn on the whole Ring using `full_property`. If zero, turn off it with `pybox.color.OFF`
-
-        Examples:
-            >>> ring.write(1)   # turn on all the ring with current global color
-            >>> ring.write(0)   # turn off all the ring
-        """
-        if col is not None:
-            if isinstance(col, tuple):
-                if col != OFF:
-                    self._global_col = col
-                _col = col
-            elif col == 0:
-                _col = OFF
-            else:
-                _col = self._global_col
-        else:
-            _col = self._global_col
-
-        self._np.fill(_col)
-
-
-    def on(self):
-        """Turn on the ring globally.
-
-        Examples:
-            >>> ring.on()   # turn on all the ring with current global color
-        """
-        self.write(1)
-
-    def off(self):
-        """Turn off the ring globally.
-
-        Examples:
-            >>> ring.off()  # turn off the ring
-        """
-        self.write(0)
-
-    def toggle(self):
-        """Turn on the ring globally if the first Pixel is currently turned off and viceversa.
-
-        """
-        if self._np[0] == OFF:
-            self.write(1)
-        else:
-            self.write(0)
-
-    @property
-    def color(self, col: tuple[int] = RED):
-        """Get or set the global color used in `write` method
-
-        Args:
-            col (tuple[int]): color in tuple format, you can use pybox.color identifier. [ *Default*: `pybox.color.RED` ].
-        """
-
-        self._global_col = col
-
-    @color.setter
-    def color(self):
-        return self._global_col
-
-    def set_pixel_color(self, index: int=None, col=None):
+    def set_pixel_color(self, index: int = None, col: tuple = None):
         """set single Pixel color.
 
         Args:
-            index (_type_): _description_
-            col (_type_, optional): _description_. [ *Default*: `None` ].
+            index: position index of Pixel
+            col: color in (r, g, b) color. Tipically an identifier from `pybox.color` [ *Default*: `None` ].
         """
         self._col[index] = col
 
@@ -161,7 +178,7 @@ class RING:
             except TypeError as exc:
                 raise TypeError(
                     "Please, provide an int, a tuple, a list or a range as first arg") from exc
-            
+
     def set_pixel(self, index: int = None, col: tuple[int] = None):
         """set color of a (group of) Pixel(s).
 
