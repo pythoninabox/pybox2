@@ -47,7 +47,7 @@ class RING:
     def __set_single_led(self, index, color):
         self._np[index] = self.__parse_color(index, color)
 
-    def write(self, col: tuple = None):
+    def write(self, col: tuple = None) -> None:
         """Manage all the ring globally.
 
         Args:
@@ -71,7 +71,7 @@ class RING:
 
         self._np.fill(_col)
 
-    def on(self):
+    def on(self) -> None:
         """Turn on the ring globally.
 
         Examples:
@@ -79,7 +79,7 @@ class RING:
         """
         self.write(1)
 
-    def off(self):
+    def off(self) -> None:
         """Turn off the ring globally.
 
         Examples:
@@ -87,7 +87,7 @@ class RING:
         """
         self.write(0)
 
-    def toggle(self):
+    def toggle(self) -> None:
         """Turn on the ring globally if the first Pixel is currently turned off and viceversa.
 
         """
@@ -97,7 +97,7 @@ class RING:
             self.write(0)
 
     @property
-    def color(self):
+    def color(self) -> tuple[int]:
         """Get or set the global color used in `write` method
 
         Args:
@@ -111,11 +111,11 @@ class RING:
         return self._global_col
 
     @color.setter
-    def color(self, col: tuple[int] = RED):
+    def color(self, col: tuple[int] = RED) -> None:
         self._global_col = col
 
     @property
-    def brightness(self):
+    def brightness(self) -> float:
         """Get or set brightness (only at global level)
 
         Args:
@@ -124,10 +124,10 @@ class RING:
         return self._np.brightness
 
     @brightness.setter
-    def brightness(self, value: float = None):
+    def brightness(self, value: float = None) -> None:
         self._np.brightness = value
 
-    def __setitem__(self, index: int, item: tuple[int]):
+    def __setitem__(self, index: int, item: tuple[int]) -> None:
         """Set a pixel as list item
 
         Description: 
@@ -144,7 +144,7 @@ class RING:
         """
         self._np[index] = self.__parse_color(index, item)
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> tuple[int]:
         """Get color at index.
 
         Args:
@@ -157,7 +157,7 @@ class RING:
         """
         return self._np[index]
 
-    def set_pixel_color(self, index: int = None, col: tuple = None):
+    def set_pixel_color(self, index: int = None, col: tuple = None) -> None:
         """set single Pixel color.
 
         Args:
@@ -179,7 +179,7 @@ class RING:
                 raise TypeError(
                     "Please, provide an int, a tuple, a list or a range as first arg") from exc
 
-    def set_pixel(self, index: int = None, col: tuple[int] = None):
+    def set_pixel(self, index: int = None, col: tuple[int] = None) -> None:
         """set color of a (group of) Pixel(s).
 
         You can set a single Pixel with a int number. Alternatively you can set a group of Pixels with a list (or tuple) 
@@ -192,7 +192,8 @@ class RING:
         Examples:
             >>> ring.set_pixelset(0, GREEN)         # turn on the Pixel at index 0 (in green)
             >>> ring.set_pixel([0,1,2], BLUE)       # turn on first three Pixels (in blue)
-            >>> ring.set_pixel(range(0,12,2), RED)  # turn on in red all Pixels at even positions (in red)
+            >>> ring.set_pixel(range(0,12,2), RED)  # turn on all Pixels at even positions (in red)
+            >>> ring.set_pixel(0, OFF)              # turn off the Pixel at index 0
         """
         if isinstance(index, int):
             self.__set_single_led(index, col)
@@ -208,7 +209,7 @@ class RING:
                 raise TypeError(
                     "Please, provide an int, a tuple, a list or a range as first arg") from exc
 
-    def __parse_color(self, index, col=None):
+    def __parse_color(self, index, col=None) -> tuple[int]:
         if col is not None:
             if isinstance(col, tuple):
                 if col != OFF:
@@ -218,3 +219,8 @@ class RING:
                 return OFF
 
         return self._col[index]
+
+    def deinit(self) -> None:
+        """Blank out, turn off the ring and free the hardware for re-use.
+        """
+        self._np.deinit()
