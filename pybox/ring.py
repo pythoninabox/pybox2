@@ -228,6 +228,9 @@ class ARING:
 
         return self._col[index]
 
+    def deinit(self):
+        self._np.deinit()
+
 
 class PIXEL:
     def __init__(self, index: int = None, color: tuple[int] = RED, ring: ARING = None):
@@ -336,6 +339,11 @@ class RING:
             >>> ring.write(0)   # turn off the ring
         """
         self.__ring.write(col)
+
+    def deinit(self) -> None:
+        """Blank out the ring and release the pin for other use. 
+        """
+        self.__ring.deinit()
 
     @property
     def color(self) -> tuple[int]:
