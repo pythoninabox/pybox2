@@ -236,19 +236,53 @@ class PIXEL:
         self.__ring.set_pixel_color(index, color)
 
     def on(self):
+        """Turn on a pixel.
+
+        Examples:
+            >>> ring[0].on()   # turn on the pixel at index 0 with current color
+        """
         self.__ring.set_pixel(self.index, 1)
 
     def off(self):
+        """Turn off a pixel.
+
+        Examples:
+            >>> ring[0].off()   # turn off the pixel at index 0 with current color
+        """
         self.__ring.set_pixel(self.index, 0)
 
     def toggle(self):
+        """Turn on a pixel if the pixel is currently turned off and viceversa.
+        """
         if self.__ring.is_on(self.index):
             self.off()
         else:
             self.on()
 
     def write(self, col: tuple = None) -> None:
+        """Write a value on a pixel.
+
+        Args:
+            col (tuple | int): if a `tuple` set `color` property and use it to turn on it, if a non-zero `int` turn on the pixel using `color`. If zero, turn off it with `pybox.color.OFF`
+
+        Examples:
+            >>> ring.write(1)   # turn on all the ring with current global color
+            >>> ring.write(0)   # turn off all the ring
+        """
         self.__ring.set_pixel(self.index, col)
+
+    @property
+    def color(self) -> tuple[int]:
+        """Get/Set color of a pixel.
+
+        Returns:
+            color: color of the pixel in `tuple[int]` format
+        """
+        return self.__ring.get_pixel_color(self.index)
+
+    @color.setter
+    def color(self, color: tuple[int]):
+        self.__ring.set_pixel_color(self.index, color)
 
 
 class RING:
@@ -256,14 +290,75 @@ class RING:
         self.__ring = ARING(color=color, brightness=brightness)
         self.strip = [PIXEL(x, ring=self.__ring) for x in range(12)]
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> PIXEL:
+        """Get PIXEL object at index.
+
+        Args:
+            index: Pixel index
+
+        Returns:
+            A Pixel object
+
+        Examples:
+            >>> ring[0]             # get first Pixel
+        """
         return self.strip[index]
 
     def on(self):
+        """Turn on the ring.
+
+        Examples:
+            >>> ring.on()   # turn on all the ring with current global color
+        """
         self.__ring.on()
 
     def off(self):
+        """Turn off the ring.
+
+        Examples:
+            >>> ring.off()   # turn off all the ring with current global color
+        """
         self.__ring.off()
 
     def toggle(self):
+        """Turn on the ring globally if the first Pixel is currently turned off and viceversa.
+        """
         self.__ring.toggle()
+
+    def write(self, col: tuple = None) -> None:
+        """Manage all the ring globally.
+
+        Args:
+            col (tuple | int): if a `tuple` set `full_color` property and use it to turn on/off the whole Ring, if a non-zero `int` turn on the whole Ring using `full_property`. If zero, turn off it with `pybox.color.OFF`
+
+        Examples:
+            >>> ring.write(1)   # turn on the ring with current ring color
+            >>> ring.write(0)   # turn off the ring
+        """
+        self.__ring.write(col)
+
+    @property
+    def color(self) -> tuple[int]:
+        """Get/Set color of the ring.
+
+        Returns:
+            color: color of the ring in `tuple[int]` format
+        """
+        return self.__ring.color
+
+    @color.setter
+    def color(self, color: tuple[int]):
+        self.__ring.color = color
+
+    @property
+    def brightness(self) -> float:
+        """Get/Set color of the ring.
+
+        Returns:
+            brightness: brightness of the ring in `float` format
+        """
+        return self.__ring.brightness
+
+    @brightness.setter
+    def brightness(self, value: float):
+        self.__ring.brightness = value
