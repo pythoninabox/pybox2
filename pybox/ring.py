@@ -4,13 +4,13 @@
 ---
 
 Examples:
-    >>> from pybox.ring import RING
+    >>> from pybox.ring import ARING
     >>> from pybox.color import *
-    >>> ring = RING()
+    >>> ring = ARING()
     >>> ring.write(1)   # turn on whole ring (in RED)
     >>> ring.write(0)   # turn off it
     
-The user basically should use only the `RING` class. 
+The user basically should use only the `ARING` class. 
 Every led in the Ring is called Pixel and a Ring is a list of Pixels.  
 """
 
@@ -19,7 +19,7 @@ import board
 from pybox.color import RED, OFF
 
 
-class RING:
+class ARING:
     """Ring class.
 
     ---
@@ -29,7 +29,7 @@ class RING:
         brightness: value between 0.0 and 1.0 [ *Default*: 0.25 ].
 
     Examples:
-        >>> ring = RING(color=GREEN)
+        >>> ring = ARING(color=GREEN)
         >>> ring.write(1)
     """
     NUMBER = 12
@@ -37,11 +37,11 @@ class RING:
     def __init__(self, ctrl_pin=board.GP27, color: tuple[int] = RED, brightness: float = 0.25):
         self._np = NeoPixel(
             ctrl_pin,
-            RING.NUMBER,
+            ARING.NUMBER,
             brightness=brightness,
             auto_write=True)
 
-        self._col = [color] * RING.NUMBER
+        self._col = [color] * ARING.NUMBER
         self._global_col = color
 
     def __set_single_led(self, index, color):
@@ -182,7 +182,10 @@ class RING:
     def get_pixel_color(self, index: int = None) -> tuple[int]:
         """Get single Pixel color.
         """
-        return self._np[index]
+        return self._col[index]
+
+    def is_on(self, index: int = None):
+        return self._np[index] != OFF
 
     def set_pixel(self, index: int = None, col: tuple[int] = None):
         """set color of a (group of) Pixel(s).
@@ -195,7 +198,7 @@ class RING:
             col (tuple[int], optional): _description_. [ *Default*: `None` ]
 
         Examples:
-            >>> ring.set_pixelset(0, GREEN)         # turn on the Pixel at index 0 (in green)
+            >>> ring.set_pixel(0, GREEN)            # turn on the Pixel at index 0 (in green)
             >>> ring.set_pixel([0,1,2], BLUE)       # turn on first three Pixels (in blue)
             >>> ring.set_pixel(range(0,12,2), RED)  # turn on in red all Pixels at even positions (in red)
         """
@@ -223,3 +226,43 @@ class RING:
                 return OFF
 
         return self._col[index]
+
+
+class PIXEL:
+    def __init__(self, index: int = None, color: tuple[int] = RED, ring: ARING = None):
+        self.index = index
+        self.__ring = ring
+        self.__ring.set_pixel_color(index, color)
+
+    def on(self):
+        self.__ring.set_pixel(self.index, 1)
+
+    def off(self):
+        self.__ring.set_pixel(self.index, 0)
+
+    def toggle(self):
+        if self.__ring.is_on(self.index):
+            self.off()
+        else:
+            self.on()
+
+    def write(self, col: tuple = None) -> None:
+        self.__ring.set_pixel(self.index, col)
+
+
+class RING:
+    def __init__(self, color: tuple[int] = RED):
+        self.__ring = ARING(color=color)
+        self.strip = [PIXEL(x, ring=self.__ring) for x in range(12)]
+
+    def __getitem__(self, index):
+        return self.strip[index]
+
+    def on(self):
+        self.__ring.on()
+
+    def off(self):
+        self.__ring.off()
+
+    def toggle(self):
+        self.__ring.toggle()
