@@ -65,8 +65,11 @@ class BUTTON:
     Examples:
         >>> but = BUTTON()
         >>> def press_callback():
-        ...     print("PRESSED :=D")
-        >>> but.add_press_handler(press_callback)
+        ...     print("PRESSED")
+        >>> def release_callback():
+        ...     print("RELEASED")
+        >>> but.press_handler(press_callback)
+        >>> but.release_handler(release_callback)
         >>> while True:
         ...     but.update()
 
@@ -83,6 +86,7 @@ class BUTTON:
         """Update button state on main loop.
 
         Examples:
+            >>> but = BUTTON()
             >>> while True:
             ...     but.update()
         """
@@ -92,16 +96,18 @@ class BUTTON:
         if event:
             if event.pressed:
                 self.__press_timestamp = time.monotonic()
-                self.__press_function()
+                if self.__press_function:
+                    self.__press_function()
             elif event.released:
                 self.__press_time = time.monotonic() - self.__press_timestamp
-                self.__release_function()
+                if self.__release_function:
+                    self.__release_function()
 
     def press_handler(self, callback: callable = None) -> None:
         """Bind a function to call when button is pressed.
 
         Args:
-            callback (callable): a function to be executed when button is pressed. 
+            callback: a function to be executed when button is pressed. 
 
         Examples:
             >>> def press_callback():
@@ -109,8 +115,9 @@ class BUTTON:
             >>> push = BUTTON()
             >>> push.press_handler(press_callback)
             >>> while True:
+            ...     # print PRESSED on press button
             ...     push.update()
-                    # it prints PRESSED on press button
+
 
         Todo:
             - Add possibility to add arguments to callback
@@ -130,8 +137,8 @@ class BUTTON:
             >>> push = BUTTON()
             >>> push.release_handler(release_callback)
             >>> while True:
-            ...     push.update()
-                    # it prints RELEASED on release button 
+            ...     # print RELEASED on release button
+            ...     push.update() 
 
         Todo:
             - Add possibility to add arguments to callback
