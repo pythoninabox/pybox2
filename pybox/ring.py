@@ -251,8 +251,8 @@ class PIXEL:
 
 
 class RING:
-    def __init__(self, color: tuple[int] = RED):
-        self.__ring = ARING(color=color)
+    def __init__(self, color: tuple[int] = RED, brightness: float = 0.25):
+        self.__ring = ARING(color=color, brightness=brightness)
         self.strip = [PIXEL(x, ring=self.__ring) for x in range(12)]
 
     def __getitem__(self, index):
