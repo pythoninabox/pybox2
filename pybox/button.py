@@ -96,10 +96,12 @@ class BUTTON:
         if event:
             if event.pressed:
                 self.__press_timestamp = time.monotonic()
-                self.__press_function()
+                if self.__press_function:
+                    self.__press_function()
             elif event.released:
                 self.__press_time = time.monotonic() - self.__press_timestamp
-                self.__release_function()
+                if self.__release_function:
+                    self.__release_function()
 
     def press_handler(self, callback: callable = None) -> None:
         """Bind a function to call when button is pressed.
