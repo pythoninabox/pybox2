@@ -157,8 +157,8 @@ class RING:
         """
         return self._np[index]
 
-    def set_pixel_color(self, index: int = None, col: tuple = None):
-        """set single Pixel color.
+    def set_pixel_color(self, index: int = None, col: tuple = None) -> None:
+        """Set single Pixel color.
 
         Args:
             index: position index of Pixel
@@ -167,7 +167,7 @@ class RING:
         self._col[index] = col
 
         if isinstance(index, int):
-            self.__set_single_led(index, col)
+            # self.__set_single_led(index, col)
             self._col[index] = col
         else:
             try:
@@ -178,6 +178,11 @@ class RING:
             except TypeError as exc:
                 raise TypeError(
                     "Please, provide an int, a tuple, a list or a range as first arg") from exc
+
+    def get_pixel_color(self, index: int = None) -> tuple[int]:
+        """Get single Pixel color.
+        """
+        return self._np[index]
 
     def set_pixel(self, index: int = None, col: tuple[int] = None):
         """set color of a (group of) Pixel(s).
