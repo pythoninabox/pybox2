@@ -10,8 +10,12 @@ Examples:
     >>> ring.write(1)   # turn on whole ring (in RED)
     >>> ring.write(0)   # turn off it
     
-The user basically should use only the `ARING` class. 
-Every led in the Ring is called Pixel and a Ring is a list of Pixels.  
+The user basically creates an instance of `RING` class. 
+This object will creates a data structure (`list`) of PIXEL objects.
+`ARING` class is a base class useful for `RING` and `PIXEL`. 
+The user never creates an `ARING` object directly. 
+A `RING` object is in substance a list of `PIXEL` objects, where a `PIXEL` object
+is a representation of a rgb led in the ring.
 """
 
 from neopixel import NeoPixel
