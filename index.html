@@ -166,47 +166,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Index
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="." class="md-nav__link md-nav__link--active">
         Index
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
-    Table Of Contents
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -372,28 +334,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#table-of-contents" class="md-nav__link">
-    Table Of Contents
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -408,23 +348,17 @@
 
 
 <h1 id="welcome-to-pybox">Welcome to pybox</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
-<p>This site contains the project documentation for the
-<code>pybox</code> package that permits to drive hardware with the same name </p>
-<h2 id="table-of-contents">Table Of Contents</h2>
-<p>The documentation consists of these separate parts:</p>
-<ol>
-<li><a href="reference.md">Reference</a><ul>
-<li><a href="button/">button</a></li>
+<p>Manage pybox hardware.</p>
+<p>Modules exported by this package: </p>
+<ul>
+<li><code>button</code>: black button manager </li>
+<li><code>color</code>: contains tuples representing various colors </li>
+<li><code>led</code>: internal or external led manage </li>
+<li><code>pot</code>: integrated pontiometer manager </li>
+<li><code>ring</code>: 12 rgb led ring manager </li>
+<li><code>tone</code>: tone generator to produce sound from integrated speaker </li>
+<li><code>simplemidi</code>: simple midi sender </li>
 </ul>
-</li>
-</ol>
 
 
 
