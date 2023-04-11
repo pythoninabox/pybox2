@@ -265,6 +265,9 @@ class PIXEL:
         self.__ring = ring
         self.__ring.set_pixel_color(index, color)
 
+    def __repr__(self) -> str:
+        return f"PIXEL object with index {self.index} and color {self.__ring.get_pixel_color(self.index)}"
+
     def on(self):
         """Turn on a pixel.
 
@@ -332,6 +335,9 @@ class RING:
     def __init__(self, color: tuple[int] = RED, brightness: float = 0.25):
         self.__ring = ARING(color=color, brightness=brightness)
         self.strip = [PIXEL(x, ring=self.__ring) for x in range(12)]
+
+    def __repr__(self) -> str:
+        return f"RING object with color {self.__ring._global_col}"
 
     def __getitem__(self, index: int) -> PIXEL:
         """Get PIXEL object at index.
