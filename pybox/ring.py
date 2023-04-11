@@ -4,9 +4,9 @@
 ---
 
 Examples:
-    >>> from pybox.ring import ARING
+    >>> from pybox.ring import RING
     >>> from pybox.color import *
-    >>> ring = ARING()
+    >>> ring = RING()
     >>> ring.write(1)   # turn on whole ring (in RED)
     >>> ring.write(0)   # turn off it
     
