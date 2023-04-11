@@ -20,7 +20,7 @@ from pybox.color import RED, OFF
 
 
 class ARING:
-    """Ring class.
+    """Aring class.
 
     ---
 
@@ -29,7 +29,7 @@ class ARING:
         brightness: value between 0.0 and 1.0 [ *Default*: 0.25 ].
 
     Examples:
-        >>> ring = ARING(color=GREEN)
+        >>> ring = RING(color=GREEN)
         >>> ring.write(1)
     """
     NUMBER = 12
@@ -184,7 +184,15 @@ class ARING:
         """
         return self._col[index]
 
-    def is_on(self, index: int = None):
+    def is_on(self, index: int = None) -> bool:
+        """Verify if a Pixel is on
+
+        Args:
+            index (int, optional): index of the pixel to check. Defaults to None.
+
+        Returns:
+            bool: True if the pixel at index is on, otherwise False
+        """
         return self._np[index] != OFF
 
     def set_pixel(self, index: int = None, col: tuple[int] = None):
@@ -233,6 +241,21 @@ class ARING:
 
 
 class PIXEL:
+    """Pixel class.
+
+        You don't create a PIXEL instance directly, but when you create a RING object, it creates a list of PIXEL objects.
+
+        Args:
+            index (int): index of the pixel in the ring class list. Defaults to None.
+            color (tuple[int], optional): color of the Pixel. Defaults to RED.
+            ring (ARING, optional): Ring reference. Defaults to None.
+
+        Examples:
+            >>> ring = RING()
+            >>> type(ring[0])
+            <class 'PIXEL'>
+    """
+
     def __init__(self, index: int = None, color: tuple[int] = RED, ring: ARING = None):
         self.index = index
         self.__ring = ring
@@ -289,6 +312,19 @@ class PIXEL:
 
 
 class RING:
+    """Ring class.
+
+    ---
+
+    Args:
+        color: color in (r, g, b) format, tipically a pybox.color identifier [ *Default*: pybox.color.RED ].
+        brightness: value between 0.0 and 1.0 [ *Default*: 0.25 ].
+
+    Examples:
+        >>> ring = RING(color=GREEN)
+        >>> ring.write(1)
+    """
+
     def __init__(self, color: tuple[int] = RED, brightness: float = 0.25):
         self.__ring = ARING(color=color, brightness=brightness)
         self.strip = [PIXEL(x, ring=self.__ring) for x in range(12)]

@@ -3,11 +3,26 @@ language-python {
     color: #ef5552;
 }
 
-.md-typeset h1, h2, h3, h4 {
+.md-typeset h1,
+h2,
+h4 {
     color: #ef5552;
 }
 
-.md-typeset .doc-heading > code {
+.md-typeset h3 {
+    background-color: #ef5552;
+}
+
+.md-typeset h3>code {
+    background-color: #ef5552;
+    color: white;
+}
+
+.md-typeset h4 {
+    font-size: 1.25em;
+}
+
+.md-typeset .doc-heading>code {
     font-size: 1.25em;
 }
 
@@ -15,15 +30,18 @@ language-python {
     font-size: 1.25em;
 }
 
-.md-typeset .doc-heading {
-    background-color: #ef5552;
+.md-typeset .doc-attribute,
+.doc-function {
+    margin-left: 3em;
 }
 
-.md-typeset .doc-heading > * {
-    background-color: #ef5552;
-    color: white;
+.md-typeset .quote {
+    border-style: none;
 }
 
-.md-typeset .doc-heading > code > * {
-    color: white;
+.md-typeset h5>.language-python {
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ef5552;
 }
