@@ -8,7 +8,7 @@ Creare un semaforo (usando i led `0`, `1` e `2` a cui vengono assegnati rispetti
 
 Quando il semaforo è giallo, il verde resta acceso. Quando diventa rosso, il verde e il giallo si spengono. 
 
-<img src="https://github.com/pythoninabox/pybox2/tree/main/docs/s_verde.svg">
+<img src="https://github.com/pythoninabox/pybox2/tree/gh-pages/s_verde.svg">
 
 Eseguire la sequenza dei 3 stati continuamente
 
