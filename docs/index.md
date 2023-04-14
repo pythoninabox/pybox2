@@ -6,7 +6,7 @@ Modules exported by this package:
 
 - [`BUTTON`](button.md): black button  
 - `COLOR`: contains tuples representing various colors 
-- [`LED`](led.md): internal or external led manage 
+- [`LED`](led.md): internal or external led  
 - `POT`: integrated pontiometer  
 - [`RING`](ring.md): 12 rgb led ring  
 - `TONE`: tone generator to produce sound from integrated speaker 
