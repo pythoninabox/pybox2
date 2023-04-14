@@ -6,6 +6,10 @@ Creare un semaforo (usando i led `0`, `1` e `2` a cui vengono assegnati rispetti
 2.  giallo per 1 secondo
 3.  rosso per 6 secondi 
 
+Quando il semaforo è giallo, il verde resta acceso. Quando diventa rosso, il verde e il giallo si spengono. 
+
+<img src="https://github.com/pythoninabox/pybox2/tree/main/docs/s_verde.svg">
+
 Eseguire la sequenza dei 3 stati continuamente
 
 # 2 - DUE SEMAFORI

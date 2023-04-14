@@ -42,3 +42,4 @@ nav:
   - Exercises:
     - Button: tut_button.md
     - Led: tut_led.md
+    - Ring: tut_ring.md
