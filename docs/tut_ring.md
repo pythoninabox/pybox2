@@ -27,12 +27,19 @@ Creare due semafori (uno usando i led `0`, `1`, `2` e l'altro con i led `6`, `7`
 -   Fra un illuminazione e l'altra passi mezzo secondo
 -   Una volta che il cerchio è completamente illuminato, terminare l'esecuzione
 
+![](./cerchio.png)
+
 # 4 - PASSAGGIO DI LUCE
 
 -   Utilizzare il rosso, colore di default
 -   Illuminare un led alla volta, in modo che la luce passi da uno all'altro, sequenzialmente. Non ci saranno mai due led accesi contemporaneamente.
 -   Quando si illumina l'ultimo led, ricominciare il ciclo, e così via, indefinitamente.
 
+![](./passaggio_luce.png)
+
 # 5 - PASSAGGIO DI LUCE A COLORI INTERMITTENTI
--   Eseguire l'esercizio precedente, con la seguente variazione: 
+Eseguire l'esercizio precedente, con la seguente variazione: 
+
 -   accendere un led rosso quando il led attivo è in posizione pari (`0`, `2`, `4`, ...), giallo quando dispari (`1`, `3`, `5`, ...)
+
+![](./passaggio_giallorosso.png)
