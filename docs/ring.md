@@ -1,1 +1,3 @@
+![](./ring.png)
+
 ::: pybox.ring

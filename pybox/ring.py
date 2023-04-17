@@ -11,11 +11,12 @@ Examples:
     >>> ring.write(0)   # turn off it
     
 The user basically creates an instance of `RING` class. 
-This object will creates a data structure (`list`) of PIXEL objects.
-`ARING` class is a base class useful for `RING` and `PIXEL`. 
-The user never creates an `ARING` object directly. 
-A `RING` object is in substance a list of `PIXEL` objects, where a `PIXEL` object
-is a representation of a rgb led in the ring.
+This object will creates a list of PIXEL objects, where a pixel si a representation of a rgb led in the ring.
+
+Examples:
+    >>> # turn on/off the first pixel of the ring only
+    >>> ring[0].on()
+    >>> ring[0].off()
 """
 
 from neopixel import NeoPixel
@@ -220,13 +221,14 @@ class RING:
 
     ---
 
-    Manage the ring of 12 rgb leds on board of pybox
+    Manage the ring of 12 pixels on board of the pybox
 
     Args:
         color: color in (r, g, b) format, tipically a pybox.color identifier [ *Default*: pybox.color.RED ].
         brightness: value between 0.0 and 1.0 [ *Default*: 0.25 ].
 
     Examples:
+        >>> # turn on the ring in green color
         >>> ring = RING(color=GREEN)
         >>> ring.write(1)
     """
@@ -274,7 +276,7 @@ class RING:
         self.__ring.toggle()
 
     def write(self, col: tuple = None) -> None:
-        """Manage all the ring globally.
+        """Manage the ring globally. It writes a value (`int` or `tuple`) on the ring (all the pixels).
 
         Args:
             col (tuple | int): if a `tuple` set `full_color` property and use it to turn on/off the whole Ring, if a non-zero `int` turn on the whole Ring using `full_property`. If zero, turn off it with `pybox.color.OFF`

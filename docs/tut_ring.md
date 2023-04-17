@@ -31,15 +31,47 @@ Creare due semafori (uno usando i led `0`, `1`, `2` e l'altro con i led `6`, `7`
 
 # 4 - PASSAGGIO DI LUCE
 
--   Utilizzare il rosso, colore di default
 -   Illuminare un led alla volta, in modo che la luce passi da uno all'altro, sequenzialmente. Non ci saranno mai due led accesi contemporaneamente.
+-   Utilizzare il rosso, colore di default
 -   Quando si illumina l'ultimo led, ricominciare il ciclo, e così via, indefinitamente.
 
 ![](./passaggio_luce.png)
 
 # 5 - PASSAGGIO DI LUCE A COLORI INTERMITTENTI
+
 Eseguire l'esercizio precedente, con la seguente variazione: 
 
 -   accendere un led rosso quando il led attivo è in posizione pari (`0`, `2`, `4`, ...), giallo quando dispari (`1`, `3`, `5`, ...)
 
 ![](./passaggio_giallorosso.png)
+
+# 6 - PASSAGGIO DI LUCE PARI
+
+Eseguire un passaggio di luce da un pixel all'altro, ma solo sui pixel in posizione pari.
+
+- La velocità è di 0.250 secondi
+
+![](./passaggio_pari.png)
+
+# 7 - PASSAGGIO DI LUCE ANTIORARIO
+
+Come nell'esercizio 4, ma al contrario.
+
+# 8 - AVANTI E INDIETRO
+
+Creare un passaggio di luce, che inizi dal primo pixel (come nell'esercizio 4) arrivi all'ultimo e poi torni indietro, per poi ricominciare.
+
+- La velocità è di 0.150 secondi
+
+![](./pingpong.gif)
+
+# 9 - RANDOM
+
+Usare il modulo `random` per accendere un pixel scelto a caso ogni 100 millisecondi. Non ci possono essere due pixel accesi contemporaneamente. Quando se ne accende uno, si spegne il precedente.
+
+# 10 - WORM
+
+Creare un `filo` di 3 pixel che si muovono lungo l'anello alla velocità di 50 millisecondi per ogni spostamento.
+
+![](./worm.gif)
+
