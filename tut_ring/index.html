@@ -390,8 +390,8 @@
 <p><img alt="" src="../cerchio.png" /></p>
 <h1 id="4-passaggio-di-luce">4 - PASSAGGIO DI LUCE</h1>
 <ul>
-<li>Utilizzare il rosso, colore di default</li>
 <li>Illuminare un led alla volta, in modo che la luce passi da uno all'altro, sequenzialmente. Non ci saranno mai due led accesi contemporaneamente.</li>
+<li>Utilizzare il rosso, colore di default</li>
 <li>Quando si illumina l'ultimo led, ricominciare il ciclo, e così via, indefinitamente.</li>
 </ul>
 <p><img alt="" src="../passaggio_luce.png" /></p>
@@ -401,6 +401,25 @@
 <li>accendere un led rosso quando il led attivo è in posizione pari (<code>0</code>, <code>2</code>, <code>4</code>, ...), giallo quando dispari (<code>1</code>, <code>3</code>, <code>5</code>, ...)</li>
 </ul>
 <p><img alt="" src="../passaggio_giallorosso.png" /></p>
+<h1 id="6-passaggio-di-luce-pari">6 - PASSAGGIO DI LUCE PARI</h1>
+<p>Eseguire un passaggio di luce da un pixel all'altro, ma solo sui pixel in posizione pari.</p>
+<ul>
+<li>La velocità è di 0.250 secondi</li>
+</ul>
+<p><img alt="" src="../passaggio_pari.png" /></p>
+<h1 id="7-passaggio-di-luce-antiorario">7 - PASSAGGIO DI LUCE ANTIORARIO</h1>
+<p>Come nell'esercizio 4, ma al contrario.</p>
+<h1 id="8-avanti-e-indietro">8 - AVANTI E INDIETRO</h1>
+<p>Creare un passaggio di luce, che inizi dal primo pixel (come nell'esercizio 4) arrivi all'ultimo e poi torni indietro, per poi ricominciare.</p>
+<ul>
+<li>La velocità è di 0.150 secondi</li>
+</ul>
+<p><img alt="" src="../pingpong.gif" /></p>
+<h1 id="9-random">9 - RANDOM</h1>
+<p>Usare il modulo <code>random</code> per accendere un pixel scelto a caso ogni 100 millisecondi. Non ci possono essere due pixel accesi contemporaneamente. Quando se ne accende uno, si spegne il precedente.</p>
+<h1 id="10-worm">10 - WORM</h1>
+<p>Creare un <code>filo</code> di 3 pixel che si muovono lungo l'anello alla velocità di 50 millisecondi per ogni spostamento.</p>
+<p><img alt="" src="../worm.gif" /></p>
 
 
 
