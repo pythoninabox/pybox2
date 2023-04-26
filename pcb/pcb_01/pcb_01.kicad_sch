@@ -765,11 +765,11 @@
   )
 
   (symbol (lib_id "Device:R_Potentiometer") (at 171.45 129.54 90) (unit 1)
-    (in_bom yes) (on_board yes) (fields_autoplaced)
+    (in_bom yes) (on_board yes)
     (uuid ffd1de0a-2e6f-40e4-9838-0f64236b81db)
     (property "Reference" "RV1" (id 0) (at 171.45 133.35 90))
     (property "Value" "R_Potentiometer" (id 1) (at 171.45 135.89 90))
-    (property "Footprint" "Potentiometer_THT:Potentiometer_Alps_RK097_Single_Horizontal" (id 2) (at 171.45 129.54 0)
+    (property "Footprint" "Potentiometer_THT:Potentiometer_Alps_RK097_Single_Horizontal" (id 2) (at 171.45 129.54 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 171.45 129.54 0)
