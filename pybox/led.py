@@ -31,23 +31,20 @@ class LED:
         target (str, optional): led to drive, 'internal', 'external' or a board string (i.e. board.GP18).
         color (tuple[int], optional): color in (r, g, b) format.
         brightness (float, optional): value between 0.0 and 1.0.
-    
+
     Examples:
         >>> led = LED('external')
         >>> led.color = BLUE
         >>> led.on()
     """
 
-    def __init__(self, target: str = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
+    def __init__(self, target: str = 'internal', color: tuple[int] = RED, brightness: float = 0.25, order: str = 'GRB'):
         if target == 'internal':
             pin = board.GP16
-            order = 'GRB'
         elif target == 'external':
             pin = board.GP27
-            order = 'GRB'
         else:
             pin = target
-            order = 'RGB'
 
         self._np = NeoPixel(
             pin, 1, brightness=brightness, auto_write=True, pixel_order=order)
