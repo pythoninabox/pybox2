@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="connect_device">Connect device</button>
+    <button id="devices_list">devices list</button>
+    <button id="updater">update</button>
+    <button id="disconnect_device">Disconnect device</button>
+    <button id="serial">Serial device</button>
+
+    <script>
+        let DEVICE;
+
+        $(document).ready(() => {
+            $("#connect_device").click(() => {
+                navigator.usb.requestDevice({ filters: [] })
+                    .then(device => {
+                        console.log(device.productName)
+                        console.log(device.manufacturerName)
+                        console.log(device.vendorId)
+                        DEVICE = device
+                    })
+                    .catch(error => { console.error(error); });
+            })
+
+            $("#disconnect_device").click(() => {
+                DEVICE.forget()
+            })
+
+            $("#devices_list").click(() => {
+                console.log("request list")
+                navigator.usb.getDevices()
+                    .then(devices => {
+                        devices.forEach(device => {
+                            console.log(device.productName);
+                            console.log(device.manufacturerName);
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
+            })
+
+            $("#updater").click(() => {
+                DEVICE.open()
+                    .then(DEVICE.selectConfiguration(1))
+                    .then(DEVICE.claimInterface(0))
+                    .then(DEVICE.transferOut(
+                        2,
+                        new Uint8Array(
+                            new TextEncoder().encode('Test value\n')
+                        ),
+                    ))
+                    .then(DEVICE.close())
+            })
+
+            $("#serial").click(() => {
+                navigator.serial.getPorts().then((ports) => {
+                    console.log(ports)
+                });
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
