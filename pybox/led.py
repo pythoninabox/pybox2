@@ -41,10 +41,10 @@ class LED:
     def __init__(self, target: str = 'internal', color: tuple[int] = RED, brightness: float = 0.25):
         if target == 'internal':
             pin = board.GP16
-            order = 'GRB'
+            order = 'RGB'
         elif target == 'external':
             pin = board.GP27
-            order = 'GRB'
+            order = 'RGB'
         else:
             pin = target
             order = 'RGB'
