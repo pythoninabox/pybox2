@@ -1,12 +1,9 @@
-from pybox.led import LED
-from pybox.color import *
+import digitalio, board
 import time
 
-led = LED(order='RGB')
-led.color = GREEN
+led = digitalio.DigitalInOut(board.GP29)
+led.direction = digitalio.Direction.OUTPUT
 
 while True:
-    led.on()
-    time.sleep(1)
-    led.off()
-    time.sleep(1)
+    led.value = not led.value
+    time.sleep(0.125)
