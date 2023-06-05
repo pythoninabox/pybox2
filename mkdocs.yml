@@ -38,6 +38,7 @@ nav:
   - Reference:  
     - Button Module: button.md
     - Led Module: led.md
+    - Pin Module: pin.md
     - Ring Module: ring.md
   - Exercises:
     - Button: tut_button.md
