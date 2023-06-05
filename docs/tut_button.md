@@ -20,4 +20,4 @@ Crea un algoritmo che accenda un pixel alla volta, in ordine. Quando giunge all'
 
 Crea un algoritmo che accenda (e tenga acceso) un pixel quando tieni premuto un pulsante e lo spenga quando lo rilasci. Ad ogni nuova pressione si accenderà un led diverso.
 
-![](./pixel_random.gif)
+![](./toggle_random.gif)
