@@ -10,7 +10,7 @@ Crea un algoritmo che accenda dei pixel (scelti casualmente) a distanza di 200 m
 
 ![](./toggle_luminoso.gif)
 
-## 3 - FLAG
+## 3 - CONTATORE
 
 Crea un algoritmo che accenda un pixel alla volta, in ordine. Quando giunge all'ultimo pixel, ricomincia da capo.
 
