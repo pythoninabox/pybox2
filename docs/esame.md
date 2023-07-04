@@ -6,7 +6,7 @@
     2. Test a risposta multipla
         - Sarà costituito da 9 domande: 2 punti per ogni risposta corretta, altrimenti 0. (punteggio massimo: 18). Tempo a disposizione: 45 minuti
 
-N.B. La parte di programmazione sarà discussa in classe il giorno dell'esame, ma va consegnata al docente entro il giorno Martedì 11 Luglio, alle ore 23:59
+N.B. La parte di programmazione sarà discussa in classe il giorno dell'esame, ma va consegnata al docente entro il giorno **Martedì 11 Luglio, alle ore 23:59**
 
 ## Esercizi di programmazione
 
