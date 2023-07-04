@@ -1,9 +1,12 @@
 # APPLICAZIONI MUSICALI I
 
-- L'esame si compone di due parti. Una parte di algoritmi da realizzare sulla **pybox** e un test a risposta multipla
-- Il test a risposta multipla sarà costituito da 9 domande: 2 punti per ogni risposta corretta, altrimenti 0. (punteggio massimo: 18). Tempo a disposizione: 45 minuti
-- La parte di programmazione è costituita da 3 esercizi da scegliere in un gruppo di 4. Ogni esercizio può attribuire *fino a* 4 punti (punteggio massimo: 12)
-- La parte di programmazione sarà discussa in classe il giorno dell'esame, ma va consegnata al docente entro il giorno Martedì 11 Luglio, alle ore 23:59
+- L'esame si compone di due parti. 
+    1. Algoritmi da realizzare sulla **pybox**
+        - 3 esercizi da scegliere in un gruppo di 4. Ogni esercizio può attribuire *fino a* 4 punti (punteggio massimo: 12)
+    2. Test a risposta multipla
+        - Sarà costituito da 9 domande: 2 punti per ogni risposta corretta, altrimenti 0. (punteggio massimo: 18). Tempo a disposizione: 45 minuti
+
+N.B. La parte di programmazione sarà discussa in classe il giorno dell'esame, ma va consegnata al docente entro il giorno Martedì 11 Luglio, alle ore 23:59
 
 ## Esercizi di programmazione
 
