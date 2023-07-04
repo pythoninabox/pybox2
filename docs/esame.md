@@ -11,7 +11,7 @@ N.B. La parte di programmazione sarà discussa in classe il giorno dell'esame, m
 ## Esercizi di programmazione
 
 # 1 - RANDOM COLORS
-Scrivere un algoritmo che accenda casualmente dei *pixel* alla frequenza di 0.2 secondi. Quando il pixel scelto appartiene ad uno dei primi 6, si accenderà con il colore rosso, altrimenti con il colore giallo. Vedere la figura seguente: 
+Scrivere un algoritmo che accenda casualmente dei *pixel* alla frequenza di 0.2 secondi. Quando il pixel scelto appartiene ad uno dei primi 6 (pixel 0-5), si accenderà con il colore rosso, altrimenti con il colore giallo. Vedere la figura seguente: 
 
 ![](./images/randomcolors.gif)
 
@@ -39,8 +39,7 @@ Scrivere un algoritmo che utilizzi il pulsante della pybox in questo modo:
 
 - In stato di riposo il *ring* è completamente acceso (colore rosso)
 - Quando si preme il pulsante (e si tiene premuto) dei pixel a caso lampeggiano a una velocità di 0.1 secondi, sempre con il colore rosso.
-- Al rilascio del pulsante si accendono nuovamente tutti i pixel del ring. 
-
+- Al rilascio del pulsante si accende nuovamente (e resta acceso) l'intero *ring*. 
 
 Osservare la figura animata per comprenderne il comportamento.
 
