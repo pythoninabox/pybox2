@@ -34,8 +34,9 @@ class SIMPLEBUTTON:
         0                           # if button is not pressed
     """
 
-    def __init__(self):
-        self.__btn = DigitalInOut(board.GP6)
+    def __init__(self, pin=board.GP6):
+        self.__pin = pin
+        self.__btn = DigitalInOut(pin)
         self.__btn.direction = Direction.INPUT
         self.__btn.pull = Pull.UP
 
@@ -75,8 +76,8 @@ class BUTTON:
 
     """
 
-    def __init__(self):
-        self.__keys = keypad.Keys((board.GP6,), value_when_pressed=False)
+    def __init__(self, pin=board.GP6):
+        self.__keys = keypad.Keys((pin,), value_when_pressed=False)
         self.__press_function = None
         self.__release_function = None
         self.__press_time = None
